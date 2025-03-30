@@ -1,5 +1,5 @@
 import { Stack } from "expo-router";
-import { createTamagui, TamaguiProvider } from "tamagui";
+import { createTamagui, TamaguiProvider, Button, Text } from "tamagui";
 import { PortalProvider } from "@tamagui/portal";
 import { defaultConfig } from "@tamagui/config/v4"; // for quick config install this
 import { Tabs } from "expo-router";
