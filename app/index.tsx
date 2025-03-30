@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ScrollView, View } from "react-native";
 import { PostCard } from "@/components/PostCard";
 import { PostHeader } from "@/components/PostHeader";
+import { Button } from "tamagui";
 
 const posts = [
   {
@@ -28,7 +29,8 @@ const posts = [
   {
     id: 5,
     author: "@Spad",
-    content: "MEOW MEOW MEOW MEOW MEOW",
+    content:
+      "MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW",
   },
 ];
 
@@ -57,6 +59,7 @@ export default function Index() {
             />
           ))}
         </View>
+        <Button chromeless>Load More</Button>
       </ScrollView>
     </View>
   );
