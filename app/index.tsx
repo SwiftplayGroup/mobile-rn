@@ -39,9 +39,9 @@ export default function Index() {
   };
 
   return (
-    <View>
+    <View className="flex-1 mt-12">
       <PostHeader />
-      <ScrollView className="mt-2">
+      <ScrollView className="mt-2 flex-1">
         <View className="flex-1">
           {posts.map((post) => (
             <PostCard
