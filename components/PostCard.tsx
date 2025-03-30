@@ -67,6 +67,12 @@ export function PostCard({ post, liked, onLikePress }: PostCardProps) {
             <Text className="text-sm font-bold">{post.author}</Text>
             <Text className="text-base text-gray-800">{post.content}</Text>
           </YStack>
+          <View className="flex-row justify-between mt-2">
+            <LikeButton liked={liked} onPress={() => onLikePress(post.id)} />
+            <CommentButton />
+            <RepostButton />
+            <SendButton />
+          </View>
 
           <Separator />
 
