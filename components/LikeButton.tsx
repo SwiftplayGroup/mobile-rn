@@ -1,5 +1,5 @@
-import { Button } from "@/components/Button";
 import { Heart } from "lucide-react-native";
+import { Pressable } from "react-native";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -52,7 +52,7 @@ export function LikeButton({ liked, onPress }: LikeButtonProps) {
   };
 
   return (
-    <Button variant="ghost" onPress={handlePress}>
+    <Pressable onPress={handlePress}>
       <Animated.View style={animatedStyle}>
         <Heart
           size={24}
@@ -60,6 +60,6 @@ export function LikeButton({ liked, onPress }: LikeButtonProps) {
           fill={liked ? "red" : "transparent"}
         />
       </Animated.View>
-    </Button>
+    </Pressable>
   );
 }

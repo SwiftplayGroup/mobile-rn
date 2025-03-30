@@ -1,23 +1,29 @@
 import { useState } from "react";
-import { ScrollView, Text, View } from "react-native";
-import { Button } from "@/components/Button";
-import { Card, CardFooter, CardHeader, CardContent } from "@/components/Card";
-import { LikeButton } from "@/components/LikeButton";
+import { ScrollView, View } from "react-native";
+import { PostCard } from "@/components/PostCard";
 
 const posts = [
-  { id: 1, author: "@SunnyDaze", content: "This is the content of post 1." },
+  {
+    id: 1,
+    author: "@SunnyDaze",
+    content: "I love my boyfriend so much. He is so good at valorant :D",
+  },
   {
     id: 2,
     author: "@Hadyen",
     content:
-      "This is the content of post 2. his is the content of post 2. his is the content of post 2. his is the content of post 2.",
+      "I FUCKING HATE VALORANT IT SUCKS, I SWING I GET FLASHED I DIE IT HAPPENS EVERY TIME I DONT GET TO PLAY ",
   },
-  { id: 3, author: "@SunnyDaze", content: "This is the content of post 1." },
-  { id: 4, author: "@Hadyen", content: "This is the content of post 2." },
-  { id: 5, author: "@SunnyDaze", content: "This is the content of post 1." },
-  { id: 6, author: "@Hadyen", content: "This is the content of post 2." },
-  { id: 7, author: "@SunnyDaze", content: "This is the content of post 1." },
-  { id: 8, author: "@Hadyen", content: "This is the content of post 2." },
+  {
+    id: 2,
+    author: "@Vi",
+    content: "I be doin studyin n shi",
+  },
+  {
+    id: 2,
+    author: "@Bannable",
+    content: "Just bagged a baddie by eating korean food",
+  },
 ];
 
 export default function Index() {
@@ -31,27 +37,16 @@ export default function Index() {
   };
 
   return (
-    <ScrollView className="mt-4 mb-4">
-      <View className="flex-1 items-center justify-center gap-y-2">
+    <ScrollView className="mt-2">
+      <View className="flex-1">
         {posts.map((post) => (
-          <Card key={post.id} className="w-full max-w-md h-auto p-0">
-            <CardHeader>
-              <Text className="text-sm font-bold">{post.author}</Text>
-            </CardHeader>
-            <CardContent>
-              <Text>{post.content}</Text>
-            </CardContent>
-            <CardFooter>
-              <LikeButton
-                liked={!!likedPosts[post.id]}
-                onPress={() => toggleLike(post.id)}
-              />
-            </CardFooter>
-          </Card>
+          <PostCard
+            key={post.id}
+            post={post}
+            liked={!!likedPosts[post.id]}
+            onLikePress={toggleLike}
+          />
         ))}
-        <Button variant="ghost">
-          <Text>Load More</Text>
-        </Button>
       </View>
     </ScrollView>
   );
