@@ -4,6 +4,7 @@ import { PortalProvider } from "@tamagui/portal";
 import { defaultConfig } from "@tamagui/config/v4"; // for quick config install this
 import { Tabs } from "expo-router";
 import { Home, User, Bell, Search } from "@tamagui/lucide-icons";
+import { AppHeader } from "../components/AppHeader";
 
 const config = createTamagui(defaultConfig); // Import your global CSS file
 
@@ -13,6 +14,7 @@ export default function RootLayout() {
   return (
     <TamaguiProvider config={config}>
       <PortalProvider shouldAddRootHost>
+        <AppHeader />
         <Tabs
           screenOptions={{
             tabBarActiveTintColor: "#000",
