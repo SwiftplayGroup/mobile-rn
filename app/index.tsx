@@ -44,8 +44,9 @@ export default function Index() {
 
   return (
     <View className="flex-1">
-      <PostHeader />
       <ScrollView className="flex-1">
+        <PostHeader />
+
         <View className="flex-1">
           {posts.map((post) => (
             <PostCard
