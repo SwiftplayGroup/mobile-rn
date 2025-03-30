@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { ScrollView, View } from "react-native";
 import { PostCard } from "@/components/PostCard";
+import { PostHeader } from "@/components/PostHeader";
+import { Dialog, Button } from "tamagui";
 
 const posts = [
   {
@@ -15,12 +17,12 @@ const posts = [
       "I FUCKING HATE VALORANT IT SUCKS, I SWING I GET FLASHED I DIE IT HAPPENS EVERY TIME I DONT GET TO PLAY ",
   },
   {
-    id: 2,
+    id: 3,
     author: "@Vi",
     content: "I be doin studyin n shi",
   },
   {
-    id: 2,
+    id: 4,
     author: "@Bannable",
     content: "Just bagged a baddie by eating korean food",
   },
@@ -37,17 +39,20 @@ export default function Index() {
   };
 
   return (
-    <ScrollView className="mt-2">
-      <View className="flex-1">
-        {posts.map((post) => (
-          <PostCard
-            key={post.id}
-            post={post}
-            liked={!!likedPosts[post.id]}
-            onLikePress={toggleLike}
-          />
-        ))}
-      </View>
-    </ScrollView>
+    <View>
+      <PostHeader />
+      <ScrollView className="mt-2">
+        <View className="flex-1">
+          {posts.map((post) => (
+            <PostCard
+              key={post.id}
+              post={post}
+              liked={!!likedPosts[post.id]}
+              onLikePress={toggleLike}
+            />
+          ))}
+        </View>
+      </ScrollView>
+    </View>
   );
 }

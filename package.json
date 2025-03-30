@@ -13,6 +13,7 @@
     "@rn-primitives/slot": "^1.1.0",
     "@rn-primitives/types": "^1.1.0",
     "@tamagui/config": "^1.125.31",
+    "@tamagui/lucide-icons": "^1.125.31",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "expo": "^52.0.16",
