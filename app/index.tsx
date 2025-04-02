@@ -32,6 +32,11 @@ const posts = [
     content:
       "MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW",
   },
+  {
+    id: 6,
+    author: "@CmichEsports",
+    content: "Ong we just lost another game",
+  },
 ];
 
 export default function Index() {
