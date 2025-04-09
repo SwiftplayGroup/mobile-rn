@@ -1,4 +1,3 @@
-import { View, ScrollView } from "react-native";
 import { useEffect, useState } from "react";
 import { getForums } from "../services/api/forums";
 import { Card, Input, XStack, YStack, Button, Text } from "tamagui";
