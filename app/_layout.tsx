@@ -1,56 +1,35 @@
-import { Stack } from "expo-router";
-import { createTamagui, TamaguiProvider, Button, Text } from "tamagui";
+// app/_layout.tsx
+import { useEffect } from "react";
+import { Slot, useRouter } from "expo-router";
+import { useAuth } from "@/store/auth";
+import { TamaguiProvider, createTamagui } from "tamagui";
+import { defaultConfig } from "@tamagui/config/v4";
 import { PortalProvider } from "@tamagui/portal";
-import { defaultConfig } from "@tamagui/config/v4"; // for quick config install this
-import { Tabs } from "expo-router";
-import { Home, User, Bell, Search } from "@tamagui/lucide-icons";
-import { AppHeader } from "../components/AppHeader";
 
-const config = createTamagui(defaultConfig); // Import your global CSS file
-
-import "../global.css";
+const config = createTamagui(defaultConfig);
 
 export default function RootLayout() {
+  const { token, isLoading, checkAuth } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    checkAuth();
+  }, []);
+
+  useEffect(() => {
+    if (!isLoading) {
+      if (!token) {
+        router.replace("/(auth)/login");
+      }
+    }
+  }, [isLoading, token]);
+
+  if (isLoading) return null; // or splash screen
+
   return (
     <TamaguiProvider config={config}>
       <PortalProvider shouldAddRootHost>
-        <AppHeader />
-        <Tabs
-          screenOptions={{
-            tabBarActiveTintColor: "#000",
-            tabBarInactiveTintColor: "#666",
-            headerShown: false,
-          }}
-        >
-          <Tabs.Screen
-            name="index"
-            options={{
-              title: "Home",
-              tabBarIcon: ({ color }) => <Home size={24} color={color} />,
-            }}
-          />
-          <Tabs.Screen
-            name="explore"
-            options={{
-              title: "Explore",
-              tabBarIcon: ({ color }) => <Search size={24} color={color} />,
-            }}
-          />
-          <Tabs.Screen
-            name="notifications"
-            options={{
-              title: "Notifications",
-              tabBarIcon: ({ color }) => <Bell size={24} color={color} />,
-            }}
-          />
-          <Tabs.Screen
-            name="profile"
-            options={{
-              title: "Profile",
-              tabBarIcon: ({ color }) => <User size={24} color={color} />,
-            }}
-          />
-        </Tabs>
+        <Slot />
       </PortalProvider>
     </TamaguiProvider>
   );
