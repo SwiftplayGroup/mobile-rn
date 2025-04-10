@@ -75,16 +75,16 @@ export default function Profile() {
           </Tabs.Tab>
 
           <Tabs.Tab
-            value="replies"
+            value="forums"
             flex={1}
             borderRadius="$4"
             paddingVertical="$3"
           >
             <Text
-              fontWeight={tabState === "replies" ? "600" : "400"}
-              color={tabState === "replies" ? "$color" : "$colorFocus"}
+              fontWeight={tabState === "forums" ? "600" : "400"}
+              color={tabState === "forums" ? "$color" : "$colorFocus"}
             >
-              Replies
+              Forums
             </Text>
           </Tabs.Tab>
 
@@ -123,9 +123,9 @@ export default function Profile() {
           </YStack>
         </Tabs.Content>
 
-        <Tabs.Content value="replies">
+        <Tabs.Content value="forums">
           <YStack padding="$4">
-            <Text>Replies content here</Text>
+            <Text>Forums content here</Text>
           </YStack>
         </Tabs.Content>
 
