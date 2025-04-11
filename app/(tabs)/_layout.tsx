@@ -10,7 +10,7 @@ const config = createTamagui(defaultConfig); // Import your global CSS file
 
 import "../../global.css";
 
-export default function RootLayout() {
+export default function TabsLayout() {
   return (
     <TamaguiProvider config={config}>
       <PortalProvider shouldAddRootHost>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useRouter } from "expo-router";
-import { YStack, Input, Button, Text, XStack, Theme, Spinner } from "tamagui";
+import { YStack, Input, Button, Text, XStack, View, Spinner } from "tamagui";
 import { useAuth } from "../../store/auth";
 import axios from "axios";
 import { ArrowRight } from "@tamagui/lucide-icons";
@@ -28,10 +28,10 @@ export default function LoginScreen() {
   };
 
   return (
-    <Theme name="light">
+    <View height="100%" width="100%">
       <YStack
         flex={1}
-        padding="$5"
+        padding="$4"
         gap="$4"
         maxWidth={500}
         marginHorizontal="auto"
@@ -144,6 +144,6 @@ export default function LoginScreen() {
           </XStack>
         </YStack>
       </YStack>
-    </Theme>
+    </View>
   );
 }

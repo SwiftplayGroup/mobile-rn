@@ -1,6 +1,6 @@
 // app/_layout.tsx
 import { useEffect } from "react";
-import { Slot, useRouter } from "expo-router";
+import { Slot, Stack, useRouter } from "expo-router";
 import { useAuth } from "@/store/auth";
 import { TamaguiProvider, createTamagui } from "tamagui";
 import { defaultConfig } from "@tamagui/config/v4";
@@ -29,7 +29,7 @@ export default function RootLayout() {
   return (
     <TamaguiProvider config={config}>
       <PortalProvider shouldAddRootHost>
-        <Slot />
+        <Stack />
       </PortalProvider>
     </TamaguiProvider>
   );
