@@ -1,5 +1,8 @@
 # Aiden's Todo List:
 
+- [x] Add login feature
+- [x] Add signup feature
+- [x] handle auth tokens
 - [ ] Implement post thread from index page
 - [ ] Implement fetching threads from index page
 - [ ] Implement fetching posts under threads in index page
