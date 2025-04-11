@@ -14,7 +14,6 @@ export default function TabsLayout() {
   return (
     <TamaguiProvider config={config}>
       <PortalProvider shouldAddRootHost>
-        <AppHeader />
         <Tabs
           screenOptions={{
             tabBarActiveTintColor: "#000",

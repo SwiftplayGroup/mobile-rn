@@ -12,6 +12,7 @@ import {
 import { useState } from "react";
 import { AlignRight, Settings, Search, BarChart2 } from "@tamagui/lucide-icons";
 import { Link, useRouter } from "expo-router";
+import { Stack } from "expo-router";
 
 export default function Profile() {
   const [tabState, setTabState] = useState("posts");
@@ -19,6 +20,12 @@ export default function Profile() {
 
   return (
     <View>
+      <Stack.Screen
+        options={{
+          headerShown: false,
+          headerTitle: "Profile",
+        }}
+      />
       <View className="flex-row items-center justify-between w-full px-4">
         <Button size="$2" chromeless>
           <Text>

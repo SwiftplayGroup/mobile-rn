@@ -34,20 +34,19 @@ export default function LoginScreen() {
         padding="$4"
         gap="$4"
         maxWidth={500}
-        marginHorizontal="auto"
         justifyContent="center"
       >
-        <YStack gap="$6" marginBottom="$6">
+        <YStack gap="$1" marginBottom="$8">
           <Text
             fontFamily="$heading"
             fontSize="$8"
             fontWeight="bold"
-            textAlign="center"
+            textAlign="left"
             color="$color12"
           >
             Welcome Back
           </Text>
-          <Text fontSize="$3" color="$color10" textAlign="center" opacity={0.8}>
+          <Text fontSize="$3" color="$color10" textAlign="left" opacity={0.8}>
             Sign in to continue to your account
           </Text>
         </YStack>
@@ -116,11 +115,12 @@ export default function LoginScreen() {
         <YStack space="$4" marginTop="$2">
           <Button
             size="$5"
-            theme="active"
+            variant="outlined"
+            theme="accent"
             borderRadius="$4"
             onPress={handleLogin}
             disabled={loading}
-            pressStyle={{ opacity: 0.9 }}
+            color={"$color1"}
             iconAfter={loading ? Spinner : ArrowRight}
           >
             <Text fontSize="$4" fontWeight="600" color="$color1">

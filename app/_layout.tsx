@@ -29,7 +29,11 @@ export default function RootLayout() {
   return (
     <TamaguiProvider config={config}>
       <PortalProvider shouldAddRootHost>
-        <Stack />
+        <Stack
+          screenOptions={{
+            headerTitle: "Swiftplay",
+          }}
+        />
       </PortalProvider>
     </TamaguiProvider>
   );
