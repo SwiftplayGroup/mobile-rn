@@ -4,11 +4,12 @@ import { YStack, Input, Button, Text, XStack, Theme, Spinner } from "tamagui";
 import { useAuth } from "../../store/auth";
 import axios from "axios";
 import { ArrowRight } from "@tamagui/lucide-icons";
+import { login as LoginCall } from "@/services/api/auth";
 
 export default function LoginScreen() {
   const router = useRouter();
   const { login } = useAuth();
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -17,12 +18,7 @@ export default function LoginScreen() {
     setError("");
     setLoading(true);
     try {
-      const res = await axios.post("https://your-backend.com/login", {
-        email,
-        password,
-      });
-      const token = res.data.token;
-      await login(token);
+      await LoginCall(username, password);
       router.replace("/(tabs)/profile");
     } catch (err) {
       setError("Invalid credentials");
@@ -56,19 +52,19 @@ export default function LoginScreen() {
           </Text>
         </YStack>
 
-        <YStack space="$5">
-          <YStack space="$2">
+        <YStack gap="$5">
+          <YStack gap="$2">
             <Text fontSize="$3" fontWeight="500" color="$color11">
-              Email
+              Username
             </Text>
             <Input
               size="$4"
               borderWidth={1}
               borderColor="$borderColor"
               borderRadius="$4"
-              placeholder="Enter your email"
-              value={email}
-              onChangeText={setEmail}
+              placeholder="Enter your username"
+              value={username}
+              onChangeText={setUsername}
               autoCapitalize="none"
               keyboardType="email-address"
               focusStyle={{ borderColor: "$color10" }}
