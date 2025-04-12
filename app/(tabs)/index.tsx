@@ -1,70 +1,40 @@
 import { useState } from "react";
 import { ScrollView, View } from "react-native";
-import { PostCard } from "@/components/PostCard";
-import { PostHeader } from "@/components/PostHeader";
+import { ThreadCard } from "@/components/ThreadCard";
+import { ThreadHeader } from "@/components/ThreadHeader";
 import { Button } from "tamagui";
-
-const posts = [
-  {
-    id: 1,
-    author: "@SunnyDaze",
-    content: "I love my boyfriend so much. He is so good at valorant :D",
-  },
-  {
-    id: 2,
-    author: "@Hadyen",
-    content:
-      "I FUCKING HATE VALORANT IT SUCKS, I SWING I GET FLASHED I DIE IT HAPPENS EVERY TIME I DONT GET TO PLAY ",
-  },
-  {
-    id: 3,
-    author: "@Vi",
-    content: "I be doin studyin n shi",
-  },
-  {
-    id: 4,
-    author: "@Bannable",
-    content: "Just bagged a baddie by eating korean food",
-  },
-  {
-    id: 5,
-    author: "@Spad",
-    content:
-      "MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW MEOW",
-  },
-  {
-    id: 6,
-    author: "@CmichEsports",
-    content: "Ong we just lost another game",
-  },
-];
+import { getThreads } from "@/services/api/threads";
+import { Thread } from "@/types/threads";
+import { useEffect } from "react";
 
 export default function Index() {
-  const [likedPosts, setLikedPosts] = useState<{ [key: number]: boolean }>({});
+  const [threads, setThreads] = useState<Thread[]>([]);
 
-  const toggleLike = (postId: number) => {
-    setLikedPosts((prev) => ({
-      ...prev,
-      [postId]: !prev[postId],
-    }));
-  };
+  useEffect(() => {
+    const fetchThreads = async () => {
+      try {
+        const data = await getThreads();
+        setThreads(data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchThreads();
+  }, []);
 
   return (
     <View className="flex-1">
       <ScrollView className="flex-1">
-        <PostHeader />
+        <ThreadHeader />
 
         <View className="flex-1">
-          {posts.map((post) => (
-            <PostCard
-              key={post.id}
-              post={post}
-              liked={!!likedPosts[post.id]}
-              onLikePress={toggleLike}
-            />
+          {threads.map((thread) => (
+            <ThreadCard key={thread._id} thread={thread} />
           ))}
         </View>
-        <Button chromeless>Load More</Button>
+        <Button chromeless onPress={() => {}}>
+          Load More
+        </Button>
       </ScrollView>
     </View>
   );

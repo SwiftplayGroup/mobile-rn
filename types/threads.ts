@@ -1,5 +1,5 @@
 export interface Thread {
-  id: string;
+  _id: string;
   user: string;
   content: string;
   forum?: string;
@@ -9,3 +9,5 @@ export interface Thread {
   likes: number;
   isDeleted: boolean;
 }
+
+export type CreateThreadPayload = Omit<Thread, "_id">;

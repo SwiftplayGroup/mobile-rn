@@ -6,30 +6,27 @@ import { RepostButton } from "@/components/RepostButton";
 import { SendButton } from "@/components/SendButton";
 import { Sheet, XStack, YStack, Button, Separator } from "tamagui";
 import { X } from "@tamagui/lucide-icons";
+import { Thread } from "@/types/threads";
 
-interface Post {
-  id: number;
-  author: string;
-  content: string;
+interface ThreadCardProps {
+  thread: Thread;
 }
 
-interface PostCardProps {
-  post: Post;
-  liked: boolean;
-  onLikePress: (postId: number) => void;
-}
-
-export function PostCard({ post, liked, onLikePress }: PostCardProps) {
+export function ThreadCard({ thread }: ThreadCardProps) {
   const [open, setOpen] = useState(false);
+
+  const onLikePress = (id: string) => {
+    // Implement like functionality here
+  };
 
   return (
     <>
       <Pressable onPress={() => setOpen(true)}>
         <View className="w-full max-w-md p-4 border-b border-gray-300">
-          <Text className="text-sm font-bold">{post.author}</Text>
-          <Text className="text-base text-gray-800 mt-1">{post.content}</Text>
+          <Text className="text-sm font-bold">{thread.user}</Text>
+          <Text className="text-base text-gray-800 mt-1">{thread.content}</Text>
           <View className="flex-row justify-between mt-2">
-            <LikeButton liked={liked} onPress={() => onLikePress(post.id)} />
+            <LikeButton liked={false} onPress={() => onLikePress(thread._id)} />
             <CommentButton />
             <RepostButton />
             <SendButton />
@@ -64,11 +61,11 @@ export function PostCard({ post, liked, onLikePress }: PostCardProps) {
           </XStack>
 
           <YStack gap="$2">
-            <Text className="text-sm font-bold">{post.author}</Text>
-            <Text className="text-base text-gray-800">{post.content}</Text>
+            <Text className="text-sm font-bold">{thread.user}</Text>
+            <Text className="text-base text-gray-800">{thread.content}</Text>
           </YStack>
           <View className="flex-row justify-between mt-2">
-            <LikeButton liked={liked} onPress={() => onLikePress(post.id)} />
+            <LikeButton liked={false} onPress={() => onLikePress(thread._id)} />
             <CommentButton />
             <RepostButton />
             <SendButton />

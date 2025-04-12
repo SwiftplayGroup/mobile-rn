@@ -9,10 +9,37 @@ import {
 } from "tamagui";
 import { Pressable, Text } from "react-native";
 import { X } from "@tamagui/lucide-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { createThread } from "@/services/api/threads";
+import { CreateThreadPayload } from "@/types/threads";
 
-export function PostHeader() {
+export function ThreadHeader() {
   const [open, setOpen] = useState(false);
+  const [content, setContent] = useState("");
+
+  const handleCreateThread = async () => {
+    if (!content.trim()) return;
+
+    const newThread: CreateThreadPayload = {
+      user: "@username",
+      content,
+      forum: undefined,
+      date: new Date(),
+      tags: [],
+      views: 0,
+      likes: 0,
+      isDeleted: false,
+    };
+
+    try {
+      await createThread(newThread);
+      setContent("");
+      setOpen(false);
+    } catch (err) {
+      console.error("Failed to create thread", err);
+      // Optional: show user feedback
+    }
+  };
 
   return (
     <>
@@ -62,7 +89,7 @@ export function PostHeader() {
             />
           </XStack>
           <Text>Share what's on your mind with your friends.</Text>
-          <TextArea placeholder="What's happening?" />
+          <TextArea placeholder="What's happening?" onChangeText={setContent} />
           <XStack alignSelf="flex-end" gap="$4">
             <Button
               theme="alt1"
@@ -71,7 +98,9 @@ export function PostHeader() {
             >
               Cancel
             </Button>
-            <Button theme="active">Post</Button>
+            <Button theme="active" onPress={handleCreateThread}>
+              Post
+            </Button>
           </XStack>
         </Sheet.Frame>
       </Sheet>
