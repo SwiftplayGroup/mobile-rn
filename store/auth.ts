@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { saveToken, getToken, deleteToken } from "../utils/secureStore";
+import { getSessionFromToken } from "@/services/api/auth";
 
 type AuthState = {
   token: string | null;
@@ -22,6 +23,21 @@ export const useAuth = create<AuthState>((set) => ({
   },
   checkAuth: async () => {
     const token = await getToken();
+    if (!token) {
+      set({ token: null, isLoading: false });
+      return;
+    } else {
+      const data = await getSessionFromToken(token);
+      if (!data) {
+        await deleteToken();
+        set({ token: null, isLoading: false });
+        return;
+      } else if (data.experationDate < Date.now()) {
+        set({ token: null, isLoading: false });
+      } else {
+        set({ token, isLoading: false });
+      }
+    }
     set({ token, isLoading: false });
   },
 }));

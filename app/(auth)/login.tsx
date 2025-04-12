@@ -18,8 +18,9 @@ export default function LoginScreen() {
     setError("");
     setLoading(true);
     try {
-      await LoginCall(username, password);
+      const data = await LoginCall(username, password);
       router.replace("/(tabs)/profile");
+      login(data.token);
     } catch (err) {
       setError("Invalid credentials");
     } finally {

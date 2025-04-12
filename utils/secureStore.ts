@@ -5,7 +5,8 @@ export async function saveToken(token: string) {
 }
 
 export async function getToken() {
-  return await SecureStore.getItemAsync("userToken");
+  const token = await SecureStore.getItemAsync("userToken");
+  return token;
 }
 
 export async function deleteToken() {
