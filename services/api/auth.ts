@@ -29,6 +29,25 @@ export const signup = async (
   }
 };
 
+export const logout = async (
+  sessionID: string,
+  token: string,
+  accountID: string,
+) => {
+  try {
+    const response = await api.delete(`/account/sessions/${sessionID}`, {
+      headers: {
+        token,
+        "account-id": accountID,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const getSessionFromToken = async (refreshToken: string) => {
   try {
     const response = await api.post("/account/sessions/by-token", {

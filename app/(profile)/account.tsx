@@ -1,8 +1,12 @@
-import { useRouter } from "expo-router";
-import { View, Text, Button, ScrollView } from "tamagui";
+import { Text, Button, ScrollView } from "tamagui";
+import { useAuth } from "@/store/auth";
 
 export default function AccountOptions() {
-  const router = useRouter();
+  const { logout } = useAuth();
+
+  const handleSignOut = () => {
+    logout();
+  };
 
   return (
     <ScrollView contentContainerStyle={{ padding: 20 }}>
@@ -19,7 +23,7 @@ export default function AccountOptions() {
       <Button theme="blue" marginBottom="$2">
         Saved
       </Button>
-      <Button theme="red" marginTop="$4">
+      <Button theme="red" marginTop="$4" onPress={handleSignOut}>
         Sign Out
       </Button>
     </ScrollView>

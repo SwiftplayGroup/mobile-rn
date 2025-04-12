@@ -29,7 +29,6 @@ export const useAuth = create<AuthState>((set) => ({
     } else {
       const data = await getSessionFromToken(token);
       if (!data) {
-        await deleteToken();
         set({ token: null, isLoading: false });
         return;
       } else if (data.experationDate < Date.now()) {

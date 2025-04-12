@@ -33,7 +33,20 @@ export default function RootLayout() {
           screenOptions={{
             headerTitle: "Swiftplay",
           }}
-        />
+        >
+          <Stack.Screen
+            name="(auth)"
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="(tabs)"
+            options={{
+              headerBackVisible: false,
+            }}
+          />
+        </Stack>
       </PortalProvider>
     </TamaguiProvider>
   );
