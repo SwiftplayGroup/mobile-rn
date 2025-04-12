@@ -7,17 +7,35 @@ import { SendButton } from "@/components/SendButton";
 import { Sheet, XStack, YStack, Button, Separator } from "tamagui";
 import { X } from "@tamagui/lucide-icons";
 import { Thread } from "@/types/threads";
+import { createLike, hasLiked } from "@/services/api/likes";
+import { useEffect } from "react";
 
 interface ThreadCardProps {
   thread: Thread;
+  user: string;
 }
 
-export function ThreadCard({ thread }: ThreadCardProps) {
+export function ThreadCard({ thread, user }: ThreadCardProps) {
+  const [liked, setLiked] = useState(false);
   const [open, setOpen] = useState(false);
 
   const onLikePress = (id: string) => {
-    // Implement like functionality here
+    setLiked(!liked); //inverse of liked
+    createLike({ threadId: id, userId: user });
   };
+
+  useEffect(() => {
+    const fetchHasLiked = async () => {
+      try {
+        const res = await hasLiked(user, thread._id);
+        setLiked(res.liked);
+      } catch (err) {
+        console.error("Error checking like status:", err);
+      }
+    };
+
+    fetchHasLiked();
+  }, [user, thread._id]);
 
   return (
     <>
@@ -26,7 +44,7 @@ export function ThreadCard({ thread }: ThreadCardProps) {
           <Text className="text-sm font-bold">{thread.user}</Text>
           <Text className="text-base text-gray-800 mt-1">{thread.content}</Text>
           <View className="flex-row justify-between mt-2">
-            <LikeButton liked={false} onPress={() => onLikePress(thread._id)} />
+            <LikeButton liked={liked} onPress={() => onLikePress(thread._id)} />
             <CommentButton />
             <RepostButton />
             <SendButton />
@@ -65,7 +83,7 @@ export function ThreadCard({ thread }: ThreadCardProps) {
             <Text className="text-base text-gray-800">{thread.content}</Text>
           </YStack>
           <View className="flex-row justify-between mt-2">
-            <LikeButton liked={false} onPress={() => onLikePress(thread._id)} />
+            <LikeButton liked={liked} onPress={() => onLikePress(thread._id)} />
             <CommentButton />
             <RepostButton />
             <SendButton />

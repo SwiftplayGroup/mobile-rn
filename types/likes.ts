@@ -1,8 +1,12 @@
 export interface Like {
   _id: string;
   userId: string;
-  postId: string;
+  threadId: string;
   createdAt: Date;
 }
 
-export type CreateLikePayloud = Omit<Like, "_id" | "createdAt">;
+export interface HasLikedResponse {
+  liked: boolean;
+}
+
+export type CreateLikePayload = Omit<Like, "_id" | "createdAt">;

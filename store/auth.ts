@@ -4,6 +4,7 @@ import { getSessionFromToken } from "@/services/api/auth";
 
 type AuthState = {
   token: string | null;
+  user: string | null; //this is the user id
   isLoading: boolean;
   login: (token: string) => Promise<void>;
   logout: () => Promise<void>;
@@ -12,6 +13,7 @@ type AuthState = {
 
 export const useAuth = create<AuthState>((set) => ({
   token: null,
+  user: null,
   isLoading: true,
   login: async (token) => {
     await saveToken(token);
@@ -19,7 +21,7 @@ export const useAuth = create<AuthState>((set) => ({
   },
   logout: async () => {
     await deleteToken();
-    set({ token: null });
+    set({ token: null, user: null });
   },
   checkAuth: async () => {
     const token = await getToken();
@@ -34,7 +36,7 @@ export const useAuth = create<AuthState>((set) => ({
       } else if (data.experationDate < Date.now()) {
         set({ token: null, isLoading: false });
       } else {
-        set({ token, isLoading: false });
+        set({ token, user: data.accountID, isLoading: false });
       }
     }
     set({ token, isLoading: false });
