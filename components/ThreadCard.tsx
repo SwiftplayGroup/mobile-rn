@@ -21,10 +21,12 @@ export function ThreadCard({ thread, user }: ThreadCardProps) {
 
   const onLikePress = (id: string) => {
     setLiked(!liked); //inverse of liked
-    if (liked) {
+    if (liked == false) {
       // this means it was just liked
+      console.log("Liked");
       createLike({ threadId: id, userId: user });
-    } else if (!liked) {
+    } else {
+      console.log("Unliked");
       deleteLike(id, user);
     }
   };
