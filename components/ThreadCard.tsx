@@ -7,7 +7,7 @@ import { SendButton } from "@/components/SendButton";
 import { Sheet, XStack, YStack, Button, Separator } from "tamagui";
 import { X } from "@tamagui/lucide-icons";
 import { Thread } from "@/types/threads";
-import { createLike, hasLiked } from "@/services/api/likes";
+import { createLike, deleteLike, hasLiked } from "@/services/api/likes";
 import { useEffect } from "react";
 
 interface ThreadCardProps {
@@ -21,7 +21,12 @@ export function ThreadCard({ thread, user }: ThreadCardProps) {
 
   const onLikePress = (id: string) => {
     setLiked(!liked); //inverse of liked
-    createLike({ threadId: id, userId: user });
+    if (liked) {
+      // this means it was just liked
+      createLike({ threadId: id, userId: user });
+    } else if (!liked) {
+      deleteLike(id, user);
+    }
   };
 
   useEffect(() => {

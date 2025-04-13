@@ -6,8 +6,10 @@ export const createLike = async (like: CreateLikePayload) => {
   return data;
 };
 
-export const deleteLike = async (id: string) => {
-  const data = await api.delete(`/likes/${id}`);
+export const deleteLike = async (threadId: string, userId: string) => {
+  const data = await api.delete(`/likes/deleteLike`, {
+    params: { userId, threadId },
+  });
   return data;
 };
 
