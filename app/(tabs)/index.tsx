@@ -3,7 +3,7 @@ import { ScrollView, View } from "react-native";
 import { ThreadCard } from "@/components/ThreadCard";
 import { ThreadHeader } from "@/components/ThreadHeader";
 import { Button } from "tamagui";
-import { getThreads } from "@/services/api/threads";
+import { getPosts } from "@/services/api/posts";
 import { Thread } from "@/types/threads";
 import { useEffect } from "react";
 import { useAuth } from "@/store/auth";
@@ -19,7 +19,7 @@ export default function Index() {
   useEffect(() => {
     const fetchThreads = async () => {
       try {
-        const data = await getThreads();
+        const data = await getPosts();
         setThreads(data);
       } catch (err) {
         console.error(err);
