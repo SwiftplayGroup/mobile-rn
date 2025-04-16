@@ -1,18 +1,19 @@
 import { api } from "@/services/api/api";
 import { CreateLikePayload, HasLikedResponse } from "@/types/likes";
 
+//V2
 export const createLike = async (like: CreateLikePayload) => {
-  const data = await api.post("/likes", like);
+  const data = await api.post(`/posts/${like.postID}/likes`, like);
   return data;
 };
 
-export const deleteLike = async (threadId: string, userId: string) => {
-  const data = await api.delete(`/likes/deleteLike`, {
-    params: { userId, threadId },
-  });
+//V2 but not implementable
+export const deleteLike = async (likeID: string) => {
+  const data = await api.delete(`/likes/${likeID}`);
   return data;
 };
 
+//V1
 export const hasLiked = async (
   userId: string,
   threadId: string,
@@ -23,7 +24,8 @@ export const hasLiked = async (
   return data;
 };
 
+//V2
 export const getUsersLikes = async (userId: string) => {
-  const { data } = await api.get(`/accounts/likes/${userId}`);
+  const { data } = await api.get(`/users/${userId}/likes`);
   return data;
 };

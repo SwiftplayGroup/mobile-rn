@@ -3,3 +3,5 @@ export interface Forum {
   name: string;
   description: string;
 }
+
+export type CreateForumPayload = Omit<Forum, "id">;

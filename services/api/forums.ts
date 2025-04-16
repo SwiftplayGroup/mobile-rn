@@ -1,5 +1,6 @@
 import { api } from "./api";
 
+//V2
 export const getForums = async () => {
   const response = await api.get("/forums");
   return response.data;

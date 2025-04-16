@@ -10,8 +10,8 @@ import {
 import { Pressable, Text } from "react-native";
 import { X } from "@tamagui/lucide-icons";
 import { useEffect, useState } from "react";
-import { createThread } from "@/services/api/threads";
-import { CreateThreadPayload } from "@/types/threads";
+import { createPost } from "@/services/api/posts";
+import { CreatePostPayload } from "@/types/posts";
 
 export function ThreadHeader() {
   const [open, setOpen] = useState(false);
@@ -20,19 +20,18 @@ export function ThreadHeader() {
   const handleCreateThread = async () => {
     if (!content.trim()) return;
 
-    const newThread: CreateThreadPayload = {
+    const newPost: CreatePostPayload = {
       user: "@username",
       content,
+      parentPostId: undefined,
       forum: undefined,
-      date: new Date(),
       tags: [],
       views: 0,
       likes: 0,
-      isDeleted: false,
     };
 
     try {
-      await createThread(newThread);
+      await createPost(newPost);
       setContent("");
       setOpen(false);
     } catch (err) {
